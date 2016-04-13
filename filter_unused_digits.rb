@@ -7,3 +7,7 @@ def unused_digits(*args)
   my_array.each { |arg| result << arg if args.join.count(arg) == 0 }
   result.join
 end
+
+# def unused_digits  (*nums)
+#   "0123456789".delete(*nums.to_s)
+# end
