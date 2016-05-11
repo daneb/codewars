@@ -27,3 +27,18 @@ def valid_game(candidates)
   return false if candidate_scores.select { |score| score % 5 != 0}.length > 0
   true
 end
+# Any? is a great tool for VALIDATION
+
+# Far More Efficient
+# def winner(candidates)
+
+#   return false if (candidates.size != 3) || 
+#                   (candidates.any?{|cand| cand.size != 2})|| 
+#                   (candidates.any?{|cand| cand["scores"].size > 2}) || 
+#                   (candidates.any?{|cand| cand["scores"].size < 1}) || 
+#                   (candidates.any?{|cand| cand["scores"].any? { |score| (score % 5 != 0) || (score > 100)}}) 
+                  
+#   winner = candidates.map { |cand| [cand["name"], cand["scores"].reduce(:+)] }.delete_if {|(n,s)| s > 100}.max_by {|(n,s)| s }
+  
+#   winner ? winner[0] : false
+# end
