@@ -53,7 +53,7 @@ counter = 0
 end
 
 # Optimized Solution
-# def dbl_linear(n)
+def dbl_linear(n)
 #  array = [1]
 #  (n * n.size).times do |i|
 #     array << array[i] * 2 + 1
