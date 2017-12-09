@@ -1,50 +1,44 @@
-def part(n)
-  partition(n, n, [])
-end
+$result = []
 
 def partition(n, max, prefix)
-  result = []
-  if n == 0 
+  if n == 0
+    $result << prefix.split.map{|x| x.to_i}
     return 
   end
   ([max, n].min).downto(1) do |i|
-    partition(n-i, i, prefix << i)
-    result << prefix
-    prefix = []
-  end 
-  result
+    partition(n-i, i, "#{prefix} #{i}")
+  end
 end
 
-part(5)
+def find_product_of_partitions(n)
+  partition(n, n, '')
+  result = $result.map { |sub_array| sub_array.reduce(:*) }  # !> assigned but unused variable - result
+end
 
-# def single_op_sum(n)
-#   result = []
-#   (1..n).each do |outer|
-#     sum = 0
-#     temp = []
-#     (0..n).each do |inner|
-#       if sum > n
-#         temp = []
-#         break
-#       end
-#       break if sum == n
-#       temp << outer
-#       sum = sum + outer
-#     end
-#     result << temp unless temp.empty?
-#   end
-#   result
-# end
+def mean(array)
+  (array.reduce(:+) / array.count.to_f).round_point5
+end
 
-# def two_op_sum(n)
-#   result = []
-#   (0..n).each do |right|
-#     (1..n).each do |left|
-#       result << [left,right] if left + right == n
-#     end
-#   end
-#   result
-# end
+def median_of(a)
+  return nil if a.empty?
+  sorted = a.sort
+  len = sorted.length
+  median = ((sorted[(len - 1) / 2] + sorted[len / 2]) / 2.0).to_f
+  median.round_point5
+end
 
+class Float
+  def round_point5
+    (self * 2).to_f.ceil / 2.0
+  end
+end
 
-# part(5)
+def part(n)
+  products = find_product_of_partitions(n)
+  range = products.max - products.min
+  average = mean(products)
+  median = (median_of products)
+  "Range: #{range} Average: #{format("%.2f", average)} Median: #{format("%.2f", median)}"
+end
+
+4.times { p "Hello"}         
